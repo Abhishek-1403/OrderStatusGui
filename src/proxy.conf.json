@@ -1,0 +1,7 @@
+{
+  "/api/*": {
+    "target": "https://orderme.co.in/intellicus-ecom-web-0.0.1-SNAPSHOT/orders/orderStatus",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}

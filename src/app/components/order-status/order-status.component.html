@@ -1,0 +1,293 @@
+<div class="container mt-3" style="width: 60%">
+  <div class="card">
+    <div class="card-body text-center">
+      <div *ngIf="isLoading" style="text-align: center">
+        <mat-spinner style="margin: auto"></mat-spinner>
+      </div>
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)" *ngIf="!isLoading">
+        <h1>Change Order Status</h1>
+        <div
+          class="alert alert-danger m-auto field"
+          *ngIf="orderId.touched && orderId.invalid"
+        >
+          Order Id is Required
+        </div>
+        <div>
+          <mat-form-field class="field" appearance="outline">
+            <mat-label>OrderId</mat-label>
+            <input
+              matInput
+              TYPE="number"
+              placeholder="Enter OrderId"
+              name="orderId"
+              ngModel
+              #orderId="ngModel"
+              required
+            />
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field class="field" appearance="outline">
+            <mat-label>Payment Id</mat-label>
+            <input
+              matInput
+              placehoder="Enter Payment Id"
+              name="paymentId"
+              ngModel
+              #paymentId="ngModel"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="field" appearance="outline">
+            <mat-label>Mobile Number</mat-label>
+            <input
+              matInput
+              placehoder="Enter Phone Number"
+              type="number"
+              name="mobileNo"
+              ngModel
+              #mobileNo="ngModel"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="field" appearance="outline">
+            <mat-label>Refund Amount</mat-label>
+            <input
+              matInput
+              placehoder="Enter Refund Amount"
+              type="number"
+              name="refundAmount"
+              ngModel
+              #refundAmount="ngModel"
+            />
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field class="field" appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select
+              name="status"
+              ngModel
+              #status="ngModel"
+              aria-required="true"
+            >
+              <mat-option value="CONFIRMED">Confirm</mat-option>
+              <mat-option value="CANCELLED">Cancel</mat-option>
+              <mat-option value="DELIVERY_REFUSED">Delivery Refused</mat-option>
+              <mat-option value="REFUND ">Wallet Refund</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="field" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              placehoder="Enter Password"
+              type="password"
+              name="password"
+              ngModel
+              #password="ngModel"
+              required
+            />
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="accent" type="submit">Submit</button>
+        <button mat-raised-button color="warn" type="reset">Reset</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- /* sample data */ -->
+
+<!-- <div class="my-3 row align-items-center">
+  <h5 class="bg-light mb-3 p-3">Part-A (EPF)</h5>
+  <div class="col-md-12 mb-3">
+      <p>I hereby nominate the persons(s)/cancel the nomination made by me perilously and nominate the person(s),
+          mentioned below to receive the amount standing to my credit in the employees's Provident Fund,
+          in the event of my death.</p>
+      <div class="table-responsive">
+          <table class="mb-1 table table-bordered border-primary" id="referrer_table">
+              <thead class="table-primary text-center">
+                  <tr>
+                      <th>Name of the Nominee/Nominees</th>
+                      <th>Address</th>
+                      <th>Nominees's relationship with the member</th>
+                      <th>DOB</th>
+                      <th>Total amt. or share of accumualtions in provident fund to be each nominee</th>
+                      <th>If the Nominee is a minor, name & relationship & address of the guardian who may receive the amt. during the minority of nominee</th>
+                      <th>Action </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  
+                  <tr>
+                      <td><input type="text" class="form-control" name="epfa_name[]">
+                      </td>
+                      <td><input type="text" class="form-control" name="epfa_address[]">
+                      </td>
+                      <td><input type="text" class="form-control" name="epfa_relationship[]">
+                      </td>
+                      <td><input type="date" class="form-control" name="epfa_dob[]">
+                      </td>
+                      <td><input type="text" class="form-control" name="epfa_nominee_share[]">
+                      </td>
+                      <td><input type="text" class="form-control" name="epfa_minor_nominee[]">
+                      </td>
+                      <td><button type="button" class="mt-1 btn btn-sm delete_row">Delete</button></td>
+                  </tr>
+                
+                  <tr>
+                      <td><input type="text" class="form-control" name="epfa_name[]"></td>
+                      <td><input type="text" class="form-control" name="epfa_address[]"></td>
+                      <td><input type="text" class="form-control" name="epfa_relationship[]"></td>
+                      <td><input type="date" class="form-control" name="epfa_dob[]"></td>
+                      <td><input type="text" class="form-control" name="epfa_nominee_share[]"></td>
+                      <td><input type="text" class="form-control" name="epfa_minor_nominee[]"></td>
+                      <td><button type="button" class="mt-1 btn btn-sm delete_row">Delete</button></td>
+                  </tr>
+                 
+              </tbody>
+          </table>
+          <button type="button" class="btn btn-sm mt-1" id="add_referrer_row">Add More</button>
+          <p style="font-size: 14px;">1. <b>*</b>Certified that I have no family as defined in para2(g) of the Employee's Provident Fund Scheme,
+               1952 and should I acquire a family here after the above nomination should be deemed as cancelled.</p>
+          <p style="font-size: 14px;">2. <b>*</b>Certified that my Father/Mother is/ are dependent upon me.</p>
+      </div>
+  </div>
+</div>
+
+
+
+<script>
+  $(document).ready(function() {
+      // *********** For Referrer Dynamic Entries ************ //
+      // Keep at least one row in the table
+      if ($('#referrer_table tbody tr').length == 1) {
+          $('#referrer_table tbody tr .delete_row').prop('disabled', true);
+      }
+
+      // Add More button click event
+      $('#add_referrer_row').click(function() {
+          var newRow = $('#referrer_table tbody tr:first').clone();
+          newRow.find('input, select').val('');
+          $('#referrer_table tbody').append(newRow);
+          $('#referrer_table tbody tr .delete_row').prop('disabled', false);
+      });
+
+      // Delete button click event
+      $(document).on('click', '#referrer_table tbody tr .delete_row', function() {
+          if ($('#referrer_table tbody tr').length > 1) {
+              $(this).closest('tr').remove();
+              if ($('#referrer_table tbody tr').length == 1) {
+                  $('#referrer_table tbody tr .delete_row').prop('disabled', true);
+              }
+          }
+      });
+      // =========================================================== //
+
+      // *********** For Part B Dynamic Entries ************ //
+      // Keep at least one row in the table
+      if ($('#part_b_table tbody tr').length == 1) {
+          $('#part_b_table tbody tr .delete_row').prop('disabled', true);
+      }
+
+      // Add More button click event
+      $('#add_part_b_row').click(function() {
+          var newRow = $('#part_b_table tbody tr:first').clone();
+          newRow.find('input, select').val('');
+          $('#part_b_table tbody').append(newRow);
+          $('#part_b_table tbody tr .delete_row').prop('disabled', false);
+      });
+
+      // Delete button click event
+      $(document).on('click', '#part_b_table tbody tr .delete_row', function() {
+          if ($('#part_b_table tbody tr').length > 1) {
+              $(this).closest('tr').remove();
+              if ($('#part_b_table tbody tr').length == 1) {
+                  $('#part_b_table tbody tr .delete_row').prop('disabled', true);
+              }
+          }
+      });
+      // =========================================================== //
+
+      // *********** For Part B1 Dynamic Entries ************ //
+      // Keep at least one row in the table
+      if ($('#part_b1_table tbody tr').length == 1) {
+          $('#part_b1_table tbody tr .delete_row').prop('disabled', true);
+      }
+
+      // Add More button click event
+      $('#add_part_b1_row').click(function() {
+          var newRow = $('#part_b1_table tbody tr:first').clone();
+          newRow.find('input, select').val('');
+          $('#part_b1_table tbody').append(newRow);
+          $('#part_b1_table tbody tr .delete_row').prop('disabled', false);
+      });
+
+      // Delete button click event
+      $(document).on('click', '#part_b1_table tbody tr .delete_row', function() {
+          if ($('#part_b1_table tbody tr').length > 1) {
+              $(this).closest('tr').remove();
+              if ($('#part_b1_table tbody tr').length == 1) {
+                  $('#part_b1_table tbody tr .delete_row').prop('disabled', true);
+              }
+          }
+      });
+      // =========================================================== //
+
+      // *********** For Part C Dynamic Entries ************ //
+      // Keep at least one row in the table
+      if ($('#part_c_table tbody tr').length == 1) {
+          $('#part_c_table tbody tr .delete_row').prop('disabled', true);
+      }
+
+      // Add More button click event
+      $('#add_part_c_row').click(function() {
+          var newRow = $('#part_c_table tbody tr:first').clone();
+          newRow.find('input, select').val('');
+          $('#part_c_table tbody').append(newRow);
+          $('#part_c_table tbody tr .delete_row').prop('disabled', false);
+      });
+
+      // Delete button click event
+      $(document).on('click', '#part_c_table tbody tr .delete_row', function() {
+          if ($('#part_c_table tbody tr').length > 1) {
+              $(this).closest('tr').remove();
+              if ($('#part_c_table tbody tr').length == 1) {
+                  $('#part_c_table tbody tr .delete_row').prop('disabled', true);
+              }
+          }
+      });
+      // =========================================================== //
+     
+  });
+</script> -->
+
+<!-- <div class="mb-4 pb-2">
+  <div
+    class="alert alert-danger form-control"
+    *ngIf="shopname.touched && shopname.invalid"
+  >
+    Shop name Required
+  </div>
+  <div class="form-outline">
+    <input
+      type="text"
+      id="form3Examplev4"
+      class="form-control form-control-lg"
+      placeholder="Enter your shop name here.."
+      name="shopname"
+      required
+      ngModel
+      #shopname="ngModel"
+    />
+    <label class="form-label" for="form3Examplev4">Shop Name</label>
+  </div>
+</div> -->
