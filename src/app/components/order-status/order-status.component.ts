@@ -53,7 +53,7 @@ export class OrderStatusComponent implements OnInit {
       return;
     }
     if (
-      (this.data.status == 'REFUND ' &&
+      ((this.data.status == 'REFUND ' || this.data.status == "PARTIAL_REFUND" )&&
         (this.data.mobileNo == '' || this.data.refundAmount.length == 0)) 
     ) {
       this.snack.open(

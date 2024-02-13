@@ -10,7 +10,7 @@
           class="alert alert-danger m-auto field"
           *ngIf="orderId.touched && orderId.invalid"
         >
-          Order Id is Required
+          Enter valid orderId
         </div>
         <div>
           <mat-form-field class="field" appearance="outline">
@@ -20,6 +20,9 @@
               TYPE="number"
               placeholder="Enter OrderId"
               name="orderId"
+              minlength="4"
+              maxlength="8"
+              min="1000"
               ngModel
               #orderId="ngModel"
               required
@@ -46,6 +49,8 @@
               matInput
               placehoder="Enter Phone Number"
               type="number"
+              min="1111111111"
+              max="9999899990"
               name="mobileNo"
               ngModel
               #mobileNo="ngModel"
@@ -60,6 +65,8 @@
               placehoder="Enter Refund Amount"
               type="number"
               name="refundAmount"
+              min="1"
+              max="20000"
               ngModel
               #refundAmount="ngModel"
             />
@@ -79,6 +86,8 @@
               <mat-option value="CANCELLED">Cancel</mat-option>
               <mat-option value="DELIVERY_REFUSED">Delivery Refused</mat-option>
               <mat-option value="REFUND ">Wallet Refund</mat-option>
+              <mat-option value="PARTIAL_REFUND">Partial Refund</mat-option>
+
             </mat-select>
           </mat-form-field>
         </div>
